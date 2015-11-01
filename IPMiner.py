@@ -545,7 +545,7 @@ def get_NPinter_interaction():
             print val
     fw_pro.close()     
 
-def get_own_lncRNA_protein(datafile = 'ncRNA-protein/lncRNA-protein-694.txt'):
+def get_own_lncRNA_protein(datafile = 'ncRNA-protein/lncRNA-protein-488.txt'):
     protein_seq = {}
     RNA_seq = {}
     interaction_pair = {}
@@ -623,13 +623,13 @@ def prepare_complex_feature(rna_file, protein_file, seperate = False):
     
     return np.array(train), pairs
 
-def prepare_RPI694_feature(extract_only_posi = False, 
+def prepare_RPI488_feature(extract_only_posi = False, 
                                    pseaac_file = None, deepmind = False, seperate = False, chem_fea = True):
-    print 'RPI694 dataset'
+    print 'RPI488 dataset'
     interaction_pair = {}
     RNA_seq_dict = {}
     protein_seq_dict = {}
-    with open('ncRNA-protein/lncRNA-protein-694.txt', 'r') as fp:
+    with open('ncRNA-protein/lncRNA-protein-488.txt', 'r') as fp:
         for line in fp:
             if line[0] == '>':
                 values = line[1:].strip().split('|')
@@ -1317,8 +1317,8 @@ def get_data(dataset):
     elif dataset == 'RPI369':
         X, labels, chem_fea = prepare_RPI2241_369_feature('ncRNA-protein/RPI369_trainingSetFeatures.csv', 'ncRNA-protein/RPI369.csv', 
                                                   'ncRNA-protein/RPI369_rna.fa', 'ncRNA-protein/RPI369_all.txt', 'ncRNA-protein/RPI369_protein.fa', graph = False)
-    elif dataset == 'RPI694':
-        X, labels = prepare_RPI694_feature()
+    elif dataset == 'RPI488':
+        X, labels = prepare_RPI488_feature()
         
     print X.shape
     #pdb.set_trace()
@@ -1747,8 +1747,8 @@ def get_data_deepmind(dataset, deepmind =False, seperate = True, chem_fea = Fals
     elif dataset == 'RPI369':
         X, labels = prepare_RPI2241_369_feature('ncRNA-protein/RPI369_rna.fa', 'ncRNA-protein/RPI369_all.txt', 
                                                   'ncRNA-protein/RPI369_protein.fa', graph = False, deepmind = deepmind, seperate = seperate, chem_fea = chem_fea)
-    elif dataset == 'RPI694':
-        X, labels = prepare_RPI694_feature(deepmind = deepmind, seperate = seperate, chem_fea = chem_fea)
+    elif dataset == 'RPI488':
+        X, labels = prepare_RPI488_feature(deepmind = deepmind, seperate = seperate, chem_fea = chem_fea)
     elif dataset == 'RPIntDB':
         X, labels = prepare_RPIntDB_feature(seperate = seperate)
     elif dataset == 'RPI13254':
@@ -2185,7 +2185,7 @@ parser = argparse.ArgumentParser(description="""IPMiner: Hidden ncRNA-protein in
 
 parser.add_argument('-dataset',
                     type=str, help='which dataset you want to do 5-fold cross-validation',
-                    default='RPI694')
+                    default='RPI488')
 args = parser.parse_args()
 dataset = args.dataset
 IPMiner(dataset)

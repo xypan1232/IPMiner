@@ -1,0 +1,122 @@
+﻿
+<!-- saved from url=(0045)http://www.gps.caltech.edu/~tapio/imputation/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>IPMiner: Hidden ncRNA-protein interaction sequential pattern mining with stacked autoencoder for accurate computational prediction</title>
+
+<meta name="KEYWORDS" lang="en-us" content="ncRNA, ncRNA-protein, deep learning, stacked autoencoder, stacked ensembing, Random Forest">
+<meta name="DESCRIPTION" content="IPMiner">
+
+<script language="JavaScript">
+<!--
+function MM_preloadImages() { //v3.0
+ var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+   var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+   if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+//-->
+</script>
+
+<style>
+      p.ref{  /* for bibliography */
+        margin-left: 4em;
+        text-indent: -2.5em
+      } 
+
+      code{
+        font-family: monospace;
+      }
+
+      p.code{
+        margin-left: 2.5em;
+	text-align: left;
+	font-family: monospace;
+      }
+</style>
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#996600" vlink="#996600" alink="#6699CC" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="MM_preloadImages(&#39;graphics/template_r3_c3_f2.jpg&#39;);">
+<table border="0" bgcolor="#F0F8FF" cellpadding="0" cellspacing="0" width="700" align="center">
+<TR>
+
+    <TD vAlign=bottom align="justify"><img border="0" src="/images/11.jpg" width="800" height="114"></TD>
+
+    </TR><br><br>
+  <tbody>
+   <tr><td valign="top" bgcolor="#ffffff">
+  <br><table width="500" border="0" align="center" cellpadding="5" cellspacing="0">
+      <tbody><tr>
+      
+      <td align="left" valign="top">
+	<font face="Verdana, Arial, Helvetica, sans-serif"><b>
+	<b>IPMiner</b>: Hidden ncRNA-protein interaction sequential pattern mining with stacked autoencoder for accurate computational prediction</b></font>
+	<br><br>
+	<font size="-2" ,="" face="Verdana, Arial, Helvetica, sans-serif">
+	  <b>
+	  [<a href="http://www.csbio.sjtu.edu.cn/bioinf/IPMiner/#introduction">Introduction</a>]&nbsp;&nbsp; 
+          [<a href="http://www.csbio.sjtu.edu.cn/bioinf/IPMiner/#installation">Code and Dataset</a>]&nbsp;&nbsp; 
+	  </b>
+	</font>
+	<br><br>
+	<font size="-1" ,="" face="Verdana, Arial, Helvetica, sans-serif">
+	  <a name="introduction"><b>Introduction</b></a>
+	</font> 
+           
+	<font size="-1" face="Verdana, Arial, Helvetica, sans-serif">
+
+	  <p>Non-coding RNA (ncRNA) plays a crucial role in different biological processes, such as post-transcriptional gene regulation. It always functions through interacting with proteins. To understand 
+the functions of ncRNAs, a fundamental step is to identify which protein interacts with this ncRNA. Therefore it is promising to computationally predict RNA-binding protein (RBP).
+In this study, we propose a computational method IPMiner to predict ncRNA-protein interactions from sequences, which makes use of deep learning and further improves its performance using stacked 
+ensembling. It automatically extracts high-level features from conjoint triad features of protein and RNA sequences using stacked autoencoder, then the high-level features are fed into Random Forest 
+to predict ncRNA-protein 
+interaction. Finally stacked ensembling is used to integrate different predictors to further improve prediction performance. The experimental results indicate that IPMiner achieves 
+high performance on our constructed lncRNA-protein interaction dataset with accuracy of 0.901, 
+sensitivity of 0.942, specificity of 0.860, precision of 0.943 and MCC of 0.805 respectively. We further comprehensively investigate IPMiner on other RNA-protein interactions datasets, which yields much better 
+performance than state-of-the-art methods, and the performance has an increase of over 20% on some datasets. Meanwhile, we further applied IPMiner for large-scale prediction of 
+ncRNA-protein network, which achieved high prediction performance.</p><br><br>
+
+<image src="./fig2.png"height="600"width="600"> <br>
+<b>Figure 1</b>. The flowchart of proposed IPMiner, it proceeded in two main steps. a) Train stacked autoencoder models for RNA and protein respectively, and fine tuning for stakced model using label information for RNA-protiein pairs. 
+b) Apply stacked ensembling to integrate SDA-RF, SDA-TF-RF and RPISeq-RF, which used high-level features before fine tuning, high-level features after fine tuning and raw conjoint features (k-mer) 
+respectively.&nbsp;    <br><br>
+	<font size="-1" ,="" face="Verdana, Arial, Helvetica, sans-serif">
+	  <a name="installation"><b>Code and Datasets</b></a>
+	</font> 
+           
+	<font size="-1" face="Verdana, Arial, Helvetica, sans-serif">
+	  <p>The program package consists of main python program and RNA-protein interaction dataset, including protein and RNA sequences. To
+	  install the programs, download the package (available as a <a href="http://www.csbio.sjtu.edu.cn/bioinf/IPMiner/IPMiner.tar.gz">tar.gz-file</a>) or from 
+github (<a href="https://github.com/xypan1232/IPMiner">IPMiner</a>)<br><br>
+	  <b>Dependency: </b> <br>
+		deep learning lib <a href="https://github.com/fchollet/keras/"> keras</a>   <br>
+		machine learning lib <a href="https://github.com/scikit-learn/scikit-learn">scikit-learn </a><br>
+		<br>
+	  <b>Usage: </b> <br>
+		 python IPMiner.py -datatype=RPI694 <br>
+			where RPI694 is lncRNA-protein interaction dataset, and IPMiner will do 5-fold cross-validation for it. you can also choose other 		datasets, such as RPI1807, RPI369, RPI2241, RPI13254 and NPInter.</p>	
+	    </font>
+	
+	 <tr><td>
+	 	<br>
+	<p><font size="-1" ,="" face="Verdana, Arial, Helvetica, sans-serif"><b>Reference</b></font> <br><br>
+
+   Xiaoyong Pan, Yong-Xian Fan, Junchi Yan and Hong-Bin Shen, IPMiner: Hidden ncRNA-protein interaction sequential pattern mining with stacked autoencoder for accurate computational prediction. Submitted.</td></tr>
+    </p> 
+	
+      </td>
+    </tr>
+  </tbody></table>
+  </td>
+      </tr>
+</tbody></table>
+
+
+<table width="700" border="0" cellspacing="10" cellpadding="5" align="center">
+  <tbody><tr> 
+    <td align="left" valign="top">
+      <font size="-1" face="Verdana, Arial, Helvetica, sans-serif">
+      © 2011 Computational Systems Biology/<a href="http://www.csbio.sjtu.edu.cn" target="new">Shen Group</a>.</font>
+    </td>
+  </tr>
+</tbody></table>
+
+</body></html>

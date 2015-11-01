@@ -2002,7 +2002,7 @@ def plot_roc_curve(labels, probality, legend_text, auc_tag = True):
     else:
         rects1 = plt.plot(fpr, tpr, label=legend_text )
 
-def DeePRI(dataset):
+def IPMiner(dataset):
     X, labels = get_data_deepmind(dataset, seperate = True)
     #pdb.set_trace()
     #X, labels = shuffle_two_array(X, np.array(labels))

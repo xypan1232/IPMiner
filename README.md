@@ -11,5 +11,5 @@ deep learning lib keras: https://github.com/fchollet/keras/ <br>
 machine learning lib scikit-learn: https://github.com/scikit-learn/scikit-learn <br>
 
 Usage:
-python IPMiner.py -datatype=RPI694  <br>
-where RPI694 is lncRNA-protein interaction dataset, and IPMiner will do 5-fold cross-validation for it. you can also choose other datasets, such as RPI1807, RPI369, RPI2241, RPI13254 and NPInter. 
+python IPMiner.py -datatype=RPI488  <br>
+where RPI488 is lncRNA-protein interaction dataset, and IPMiner will do 5-fold cross-validation for it. you can also choose other datasets, such as RPI1807, RPI369, RPI2241, RPI13254 and NPInter. 
