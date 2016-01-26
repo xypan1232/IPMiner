@@ -7,7 +7,7 @@ to predict ncRNA-protein
 interaction. Finally stacked ensembling is used to integrate different predictors to further improve prediction performance.
 
 Dependency: <br>
-deep learning lib keras: https://github.com/fchollet/keras/ <br>
+deep learning lib keras: https://github.com/fchollet/keras/ <br> (version Keras-0.1.2)
 machine learning lib scikit-learn: https://github.com/scikit-learn/scikit-learn <br>
 
 Usage:
