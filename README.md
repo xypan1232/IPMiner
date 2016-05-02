@@ -12,4 +12,7 @@ machine learning lib scikit-learn: https://github.com/scikit-learn/scikit-learn 
 
 Usage:
 python IPMiner.py -datatype=RPI488  <br>
-where RPI488 is lncRNA-protein interaction dataset, and IPMiner will do 5-fold cross-validation for it. you can also choose other datasets, such as RPI1807, RPI369, RPI2241, RPI13254 and NPInter. 
+where RPI488 is lncRNA-protein interaction dataset, and IPMiner will do 5-fold cross-validation for it. you can also choose other datasets, such as RPI1807, RPI369, RPI2241, RPI13254 and NPInter. <br>
+
+python IPMiner.py -r=RNA_fasta_file -p=protein_fasta_file   <br>
+it will predict pairwise interaction score for RNAs and protiens in input file.
