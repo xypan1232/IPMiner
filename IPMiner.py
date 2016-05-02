@@ -2172,6 +2172,81 @@ def IPMiner(dataset):
     #plt.savefig(save_fig_dir + selected + '_' + class_type + '.png') 
     plt.show() 
     '''
+    
+def predict_new_samples(RNA_file, protein_file):
+    train, trainlabel = get_data_deepmind('RPI488', seperate = True)
+    #test, testlabel = get_data_deepmind(datatype, seperate = True, extract_only_posi = extract_only_posi, indep_test = test_indep_dataset)
+    test, pairs = prepare_complex_feature(RNA_file, protein_file, seperate = True)
+    #pdb.set_trace()
+    #X, labels = shuffle_two_array(X, np.array(labels))
+    train_data1, train_data2 = transfer_array_format(train)
+    print train_data1.shape, train_data2.shape
+    train_data1, scaler1 = preprocess_data(train_data1)
+    train_data2, scaler2 = preprocess_data(train_data2)
+    
+    test_data1, test_data2 = transfer_array_format(test)
+    print test_data1.shape, test_data2.shape
+    test_data1, scaler1 = preprocess_data(test_data1, scaler = scaler1)
+    test_data2, scaler2 = preprocess_data(test_data2, scaler = scaler2)
+    trainlabel_new, encoder = preprocess_labels(trainlabel)
+    num_class = 3
+    blend_train = np.zeros((train.shape[0], num_class)) # Number of training data x Number of classifiers
+    blend_test = np.zeros((test.shape[0], num_class)) # Number of testing data x Number of classifiers 
+    skf = list(StratifiedKFold(trainlabel, num_class))  
+    class_index = 0
+    prefilter_train, prefilter_test, prefilter_train_bef, prefilter_test_bef = autoencoder_two_subnetwork_fine_tuning(train_data1, train_data2, 
+                                                                            trainlabel_new, test_data1, test_data2)
+
+    print 'deep autoencoder'
+    clf = RandomForestClassifier(n_estimators=50)
+    clf.fit(prefilter_train, trainlabel)
+    ae_y_pred_prob = clf.predict_proba(prefilter_test)[:,1]
+    
+    proba = transfer_label_from_prob(ae_y_pred_prob)
+    
+
+    #all_performance.append([acc, precision, sensitivity, specificity, MCC])
+    get_blend_data(class_index, RandomForestClassifier(n_estimators=50), skf, prefilter_test, prefilter_train, np.array(trainlabel), blend_train, blend_test)
+    
+    print 'deep autoencoder without fine tunning'
+    class_index = class_index + 1
+    clf = RandomForestClassifier(n_estimators=50)
+    clf.fit(prefilter_train_bef, trainlabel)
+    ae_y_pred_prob = clf.predict_proba(prefilter_test_bef)[:,1]
+    
+    proba = transfer_label_from_prob(ae_y_pred_prob)
+
+
+    #all_performance_bef.append([acc, precision, sensitivity, specificity, MCC])
+    get_blend_data(class_index, RandomForestClassifier(n_estimators=50), skf, prefilter_test_bef, prefilter_train_bef, np.array(trainlabel), blend_train, blend_test)
+    
+    print 'random forest'
+    class_index = class_index + 1
+    prefilter_train = np.concatenate((train_data1, train_data2), axis = 1)
+    prefilter_test = np.concatenate((test_data1, test_data2), axis = 1)
+    
+    clf = RandomForestClassifier(n_estimators=50)
+    clf.fit(prefilter_train, trainlabel)
+    ae_y_pred_prob = clf.predict_proba(prefilter_test)[:,1]
+    proba = transfer_label_from_prob(ae_y_pred_prob)  
+
+    #all_performance_rf.append([acc, precision, sensitivity, specificity, MCC])
+    
+    #if not (datatype == 'MSL' or datatype == 'PRC2' or datatype == 'MRP'):
+    get_blend_data(class_index, RandomForestClassifier(n_estimators=50), skf, prefilter_test, prefilter_train, np.array(trainlabel), blend_train, blend_test)
+    
+        
+    blend_train, scaler1 = preprocess_data(blend_train, stand = False)
+    blend_test, scaler1 = preprocess_data(blend_test, scaler = scaler1, stand = False)
+    
+    bclf = LogisticRegression()
+    bclf.fit(blend_train, trainlabel)
+    proba_pred = bclf.predict_proba(blend_test)[:, 1]
+    proba = bclf.predict(blend_test)
+    print 'stacked ensembling'
+    for pro, pair in zip(proba, pairs):
+        print pair, pro
+
 
 def calculate_acc(label_len, pred, label):
     num =0
@@ -2184,8 +2259,21 @@ def calculate_acc(label_len, pred, label):
 parser = argparse.ArgumentParser(description="""IPMiner: Hidden ncRNA-protein interaction sequential pattern mining with stacked autoencoder for accurate computational prediction""")
 
 parser.add_argument('-dataset',
-                    type=str, help='which dataset you want to do 5-fold cross-validation',
-                    default='RPI488')
+                    type=str, help='which dataset you want to do 5-fold cross-validation')
+
+parser.add_argument('-r',
+                    type=str, help='RNA fasta file to store RNAs')
+
+parser.add_argument('-p',
+                    type=str, help='protein fasta file to store proteins')
+
 args = parser.parse_args()
 dataset = args.dataset
-IPMiner(dataset)
+if dataset is None:
+    IPMiner(dataset)
+else:
+    RNA_file = args.r
+    protein_file = args.p
+    if RNA_file is None or protien_file is None:
+        print 'you must input RNA and protein fasta file'
+    predict_new_samples(RNA_file, protein_file)
