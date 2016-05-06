@@ -1,0 +1,42 @@
+import sys
+import os
+
+def read_fasta_file(fasta_file):
+    seq_dict = {}    
+    fp = open(fasta_file, 'r')
+    name = ''
+    #pdb.set_trace()
+    for line in fp:
+        #let's discard the newline at the end (if any)
+        line = line.rstrip()
+        #distinguish header from sequence
+        if line[0]=='>': #or line.startswith('>')
+            #it is the header
+            name = line[1:].upper() #discarding the initial >
+            seq_dict[name] = ''
+        else:
+            #it is sequence
+            seq_dict[name] = seq_dict[name] + line
+    fp.close()
+    
+    return seq_dict
+
+rna_all = sys.argv[1]
+read_fasta_file(rna_all)
+
+cli_str = './lncPro/RNAScore_rna ' + rna_file
+fex = os.popen(cli_str, 'r')
+fex.close()
+
+fp = open('RNA_fea.txt', 'r')
+index = 0
+lncpro_dict = {}
+for line in fp:
+pro_name = name_list[index]
+values = line.rstrip().split('\t')
+if len(values) < 30:
+    values = [0] * 30
+lncpro_dict[pro_name] = [float(val) for val in values]
+index = index + 1
+fp.close()
+
