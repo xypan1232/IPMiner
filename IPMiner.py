@@ -2269,7 +2269,7 @@ parser.add_argument('-p',
 
 args = parser.parse_args()
 dataset = args.dataset
-if dataset is None:
+if dataset is not None:
     IPMiner(dataset)
 else:
     RNA_file = args.r
