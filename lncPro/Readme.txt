@@ -1,3 +1,4 @@
+Original lncPro code is downloaded from http://bioinfo.bjmu.edu.cn/lncpro/.
 
 It needs to call RNAsubopt(from Vienna Package) and predator.
 
