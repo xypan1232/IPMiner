@@ -23,6 +23,15 @@ import gzip
 from random import randint
 #import xgboost as xgb
 import pandas as pd
+import pdb
+import os
+import sys
+import random
+import argparse
+from theano import tensor as T
+
+sys.path.insert(0, '/usr/local/lib/python2.7/dist-packages/Keras-0.1.2-py2.7.egg')
+
 from keras.models import Sequential, model_from_config
 from keras.layers.core import Dense, Dropout, Activation, AutoEncoder, Flatten, Merge
 from keras.layers.normalization import BatchNormalization
@@ -37,12 +46,7 @@ from keras import regularizers
 from keras.constraints import maxnorm
 from keras.optimizers import kl_divergence
 #from sknn.mlp import Classifier, Layer
-import pdb
-import os
-import sys
-import random
-import argparse
-from theano import tensor as T
+
 
 
 ''' 
@@ -610,6 +614,7 @@ def prepare_complex_feature(rna_file, protein_file, seperate = False):
     train = []
     label = []
     for RNA, RNA_seq in RNA_seq_dict.iteritems():
+        RNA_seq = RNA_seq.replace('T', 'U')
         for protein, protein_seq in protein_seq_dict.iteritems():
             pairs.append((RNA, protein))
             protein_seq1 = translate_sequence (protein_seq, group_dict)
@@ -2154,7 +2159,7 @@ def IPMiner(dataset):
     print 'mean performance of stacked ensembling'
     print np.mean(np.array(all_performance_blend), axis=0)
     print '---' * 50
-    '''
+    
     Figure = plt.figure()
     #plot_roc_curve(all_labels, all_prob[0], 'SDA-FT-RF')
     #plot_roc_curve(all_labels, all_prob[1], 'SDA-RF')
@@ -2171,7 +2176,7 @@ def IPMiner(dataset):
     plt.legend(loc="lower right")
     #plt.savefig(save_fig_dir + selected + '_' + class_type + '.png') 
     plt.show() 
-    '''
+    
     
 def predict_new_samples(RNA_file, protein_file):
     train, trainlabel = get_data_deepmind('RPI488', seperate = True)
@@ -2274,6 +2279,6 @@ if dataset is not None:
 else:
     RNA_file = args.r
     protein_file = args.p
-    if RNA_file is None or protien_file is None:
+    if RNA_file is None or protein_file is None:
         print 'you must input RNA and protein fasta file'
     predict_new_samples(RNA_file, protein_file)
