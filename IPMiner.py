@@ -705,16 +705,16 @@ def prepare_RPIntDB_feature(extract_only_posi = False,
     label = []
     chem_fea = []
     head = True
-    with open('ncRNA-protein/RPIntDB_interactions.txt', 'r') as fp:
+    with open('ncRNA-protein/RPIntDB_interactions_new.txt', 'r') as fp:
         for line in fp:
             if head:
                 head = False
                 continue
             values = line.rstrip('\r\n').split('\t')
             protein = values[0]
-            protein_seq = values[2]
-            RNA = values[3]
-            RNA_seq = values[5] 
+            protein_seq = values[1]
+            RNA = values[2]
+            RNA_seq = values[3] 
             label.append(1)
             RNA_tri_fea = get_4_nucleotide_composition(tris, RNA_seq, pythoncount =False)
             protein_tri_fea = get_4_nucleotide_composition(protein_tris, protein_seq, pythoncount =False)
