@@ -2160,24 +2160,6 @@ def IPMiner(dataset):
     print np.mean(np.array(all_performance_blend), axis=0)
     print '---' * 50
     
-    Figure = plt.figure()
-    #plot_roc_curve(all_labels, all_prob[0], 'SDA-FT-RF')
-    #plot_roc_curve(all_labels, all_prob[1], 'SDA-RF')
-    #plot_roc_curve(all_labels, all_prob[2], 'RPISeq-RF')
-    #plot_roc_curve(all_labels, all_prob[3], 'predncRBP')
-    plot_roc_curve(all_labels, all_averrage, 'Average ensembling')
-    plot_roc_curve(all_labels, all_prob[3], 'Stacked ensembling')    
-    plt.plot([0, 1], [0, 1], 'k--')
-    plt.xlim([-0.05, 1])
-    plt.ylim([0, 1.05])
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('ROC')
-    plt.legend(loc="lower right")
-    #plt.savefig(save_fig_dir + selected + '_' + class_type + '.png') 
-    plt.show() 
-    
-    
 def predict_new_samples(RNA_file, protein_file):
     train, trainlabel = get_data_deepmind('RPI488', seperate = True)
     #test, testlabel = get_data_deepmind(datatype, seperate = True, extract_only_posi = extract_only_posi, indep_test = test_indep_dataset)
