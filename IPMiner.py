@@ -29,8 +29,12 @@ import sys
 import random
 import argparse
 from theano import tensor as T
-
-sys.path.insert(0, '/usr/local/lib/python2.7/dist-packages/Keras-0.1.2-py2.7.egg')
+# keras version is 0.1.2, please install this version of keras
+import keras
+keras_version =  keras.__version__
+try:
+    print 'please install Keras 0.1.2'
+    sys.path.insert(0, '/usr/local/lib/python2.7/dist-packages/Keras-0.1.2-py2.7.egg')
 
 from keras.models import Sequential, model_from_config
 from keras.layers.core import Dense, Dropout, Activation, AutoEncoder, Flatten, Merge
@@ -2229,9 +2233,9 @@ def predict_new_samples(RNA_file, protein_file):
     bclf = LogisticRegression()
     bclf.fit(blend_train, trainlabel)
     proba_pred = bclf.predict_proba(blend_test)[:, 1]
-    proba = bclf.predict(blend_test)
+    #proba = bclf.predict(blend_test)
     print 'stacked ensembling'
-    for pro, pair in zip(proba, pairs):
+    for pro, pair in zip(proba_pred, pairs):
         print pair, pro
 
 
