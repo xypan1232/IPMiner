@@ -37,7 +37,7 @@ try:
     sys.path.insert(0, '/usr/local/lib/python2.7/dist-packages/Keras-0.1.2-py2.7.egg')
 except:
     print 'install keras 0.1.2'
-from keras.models import Sequential, model_from_config
+from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation, AutoEncoder, Flatten, Merge
 from keras.layers.normalization import BatchNormalization
 from keras.layers.advanced_activations import PReLU
