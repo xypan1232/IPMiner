@@ -18,6 +18,6 @@ python IPMiner.py -r=RNA_fasta_file -p=protein_fasta_file   <br>
 it will predict pairwise interaction score for RNAs and protiens in input file.
 
 <b> Reference </b> <br>
-Xiaoyong Pan, Yong-Xian Fan, Junchi Yan and Hong-Bin Shen. <a href=ttps://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-016-2931-8> IPMiner: hidden ncRNA-protein interaction sequential pattern mining with stacked autoencoder for accurate computational prediction</a>. BMC Genomics. 2016, 17:582 DOI: 10.1186/s12864-016-2931-8.
+Xiaoyong Pan, Yong-Xian Fan, Junchi Yan and Hong-Bin Shen. <a href=https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-016-2931-8> IPMiner: hidden ncRNA-protein interaction sequential pattern mining with stacked autoencoder for accurate computational prediction</a>. BMC Genomics. 2016, 17:582 DOI: 10.1186/s12864-016-2931-8.
 
 Contact: xypan172436atgmail.com
