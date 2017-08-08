@@ -1,0 +1,4 @@
+# NOTICE:
+For RPI-2241 dataset, the protein and RNAs in "RPI2241_all.txt" are converted to all uppercase. 
+If the same name (PDB name + chain) happens in both protein and RNA columns, then 
+one's chain should be small case, the other should be uppercase. More details please refer to PDB.
