@@ -44,7 +44,7 @@ from keras.layers.advanced_activations import PReLU
 from keras.utils import np_utils, generic_utils
 from keras.optimizers import SGD, RMSprop, Adadelta, Adagrad, Adam
 from keras.layers import containers, normalization
-from keras.layers.convolutional import Convolution2D, MaxPooling2D
+#from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.layers.recurrent import LSTM
 from keras.layers.embeddings import Embedding
 from keras import regularizers
@@ -1192,23 +1192,6 @@ def calculate_performace_without_MCC(test_num, pred_y,  labels):
     #precision = float(tp)/(tp+ fp)
     sensitivity = float(tp)/ (tp+fn)
     return acc, sensitivity
-
-def get_convolutional_fea():
-    model = Sequential()
-    
-    model.add(Convolution2D(32, 1, 3, 3, border_mode='full'))
-    model.add(Activation('relu'))
-    model.add(Convolution2D(32, 32, 3, 3))
-    model.add(Activation('relu'))
-    model.add(MaxPooling2D(poolsize=(2, 2)))
-    model.add(Dropout(0.25))
-
-    model.add(Flatten())
-    model.add(Dense(32*196, 128))
-    model.add(Activation('relu'))
-    model.add(Dropout(0.5))
-    
-    return model
 
 def get_protein_seq_concolutional_array(seq, motif_len = 4):
     #tar_list = ['0', '1', '2', '3', '4', '5', '6']
