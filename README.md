@@ -8,7 +8,7 @@ interaction. Finally stacked ensembling is used to integrate different predictor
 
 Dependency: <br>
 deep learning lib keras: https://github.com/fchollet/keras/  (version Keras-0.1.2)<br>
-machine learning lib scikit-learn: https://github.com/scikit-learn/scikit-learn <br>
+machine learning lib scikit-learn v0.17: https://github.com/scikit-learn/scikit-learn <br>
 
 Usage:
 python IPMiner.py -datatype=RPI488  <br>
