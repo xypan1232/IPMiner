@@ -8,7 +8,7 @@ interaction. Finally stacked ensembling is used to integrate different predictor
 
 Dependency: <br>
 python 2.7 <br>
-deep learning lib keras: https://github.com/fchollet/keras/  (version Keras-0.1.2)<br>
+deep learning lib keras: https://github.com/fchollet/keras/  (version Keras-0.1.2 and the backend theano v0.9)<br>
 machine learning lib scikit-learn v0.17: https://github.com/scikit-learn/scikit-learn <br>
 
 Usage:
