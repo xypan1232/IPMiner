@@ -1,6 +1,6 @@
 # NOTICE:
 
-If the same name (PDB name + chain) happens in both protein and RNA columns, then 
+If the same name (PDB name + chain) happens in both protein and RNA columns of each file, then 
 one's chain should be small case, the other should be uppercase. More details please refer to PDB. <br>
 
  Our program is case-insensitive to the case of protein or RNA names, hence, our program will convert the 
